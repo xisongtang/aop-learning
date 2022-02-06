@@ -14,9 +14,21 @@ export class ChainWheels implements IWheels {
     }
 }
 
+export class HugeWheels implements IWheels {
+    constructor() {
+        console.log("made some huge wheels");
+    }
+
+    action(): void {
+        console.log('chain wheels behave more reliable then normal wheels on grassfield');
+    }
+}
+
 export class ACar extends Car {
     private isOnSnowField = false;
+    private isOnGrassField = false;
     private chainWheels = new ChainWheels();
+    private hugeWheels = new HugeWheels();
     constructor() {
         super(new Wheels(), new Engine(new Pistons()));
     }
@@ -25,7 +37,12 @@ export class ACar extends Car {
         this.isOnSnowField = value;
     }
 
+    setIsOnGrassField(value: boolean) {
+        this.isOnSnowField = value;
+    }
+
     protected getWheels(): IWheels {
-        return this.isOnSnowField ? this.chainWheels : this.wheels;
+        return this.isOnSnowField ? this.chainWheels :
+            this.isOnGrassField ? this.wheels : this.hugeWheels;
     }
 }
