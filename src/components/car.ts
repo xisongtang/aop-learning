@@ -14,4 +14,14 @@ export class Car {
         this.engine.action();
         console.log("The car drives by.");
     }
+
+    setWheels(wheels: IWheels) {
+        this.wheels = wheels;
+        return this;
+    }
+
+    setEngine(engine: IEngine) {
+        this.engine = engine;
+        return this;
+    }
 }
