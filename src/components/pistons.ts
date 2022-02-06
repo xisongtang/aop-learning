@@ -1,4 +1,6 @@
-export class Pistons {
+import { IPistons } from "../decl";
+
+export class Pistons implements IPistons {
     constructor() {
         console.log("Made some pistons.");
     }

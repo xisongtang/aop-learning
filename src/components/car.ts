@@ -1,13 +1,12 @@
-import { Engine } from "./engine";
-import { Wheels } from "./wheels";
+import { IEngine, IWheels } from "../decl";
 
 export class Car {
-    private wheels: Wheels;
-    private engine: Engine;
+    private wheels: IWheels;
+    private engine: IEngine;
 
-    constructor() {
-        this.wheels = new Wheels();
-        this.engine = new Engine();
+    constructor(wheels: IWheels, engine: IEngine) {
+        this.wheels = wheels;
+        this.engine = engine;
     }
 
     action() {

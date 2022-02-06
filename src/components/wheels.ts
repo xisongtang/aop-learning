@@ -1,4 +1,6 @@
-export class Wheels {
+import { IWheels } from "../decl";
+
+export class Wheels implements IWheels {
     constructor() {
         console.log("made some wheels");
     }
