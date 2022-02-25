@@ -1,11 +1,14 @@
-import { BCar } from "../components/cars/BCar";
+import { Car } from "../components/car";
+import { ColdPlugin } from "../components/plugins/ColdPlugin";
 
 console.log('######## B normal temperature begin ######');
-const car = new BCar();
+const car = new Car();
+const coldPlugin = new ColdPlugin()
+coldPlugin.support(car);
 car.action();
 console.log('######## B normal temperature end ######');
 
 console.log('######## B very code begin ######');
-car.setIsVeryCold(true);
+coldPlugin.setIsVeryCold(true);
 car.action();
 console.log('######## B very code end ######');

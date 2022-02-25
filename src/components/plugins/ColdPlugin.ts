@@ -1,7 +1,5 @@
-import { IEngine, IPistons } from "../../decl";
-import { Engine } from "../engine";
+import { IEngine, IPistons, ICarPlugin } from "../../decl";
 import { Pistons } from "../pistons";
-import { Wheels } from "../wheels";
 import { Car } from "../car";
 
 class HotEngine implements IEngine {
@@ -15,19 +13,23 @@ class HotEngine implements IEngine {
     }
 }
 
-export class BCar extends Car {
+export class ColdPlugin implements ICarPlugin {
     private isVeryCold = false;
-    private hotEngine: IEngine;
-    constructor() {
-        super(new Wheels(), new Engine(new Pistons()));
-        this.hotEngine = new HotEngine(new Pistons());
-    }
+    private hotEngine = new HotEngine(new Pistons());
 
     setIsVeryCold(value: boolean) {
         this.isVeryCold = value;
     }
 
-    protected getEngine() {
-        return this.isVeryCold ? this.hotEngine : this.engine;
+    support(car: Car) {
+        car.registerEngine({
+            getEngine: (next) => () => {
+                if (this.isVeryCold) {
+                    return this.hotEngine;
+                }
+                return next();
+            }
+        })
+        return car;
     }
 }
