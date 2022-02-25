@@ -14,18 +14,28 @@ class ChainWheels implements IWheels {
     }
 }
 
-let isOnSnowField = false;
+class ACar extends Car {
+    private isOnSnowField = false;
+    private chainWheels = new ChainWheels();
+
+    setIsOnSnowField(value: boolean) {
+        this.isOnSnowField = value;
+    }
+
+    protected getWheels(): IWheels {
+        return this.isOnSnowField ? this.chainWheels : this.wheels;
+    }
+}
 
 console.log('######## A normal field begin ######');
 const pistons = new Pistons();
 const wheels = new Wheels();
 const engine = new Engine(pistons);
-const car = new Car(wheels, engine);
+const car = new ACar(wheels, engine);
 car.action();
 console.log('######## A normal field end ######');
 
 console.log('######## A snowfield begin ######');
-isOnSnowField = true;
-car.setWheels(new ChainWheels());
+car.setIsOnSnowField(true);
 car.action();
 console.log('######## A snowfield end ######');
