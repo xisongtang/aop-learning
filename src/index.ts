@@ -1,4 +1,2 @@
-import { Car } from './components/car';
-
-const car = new Car();
-car.action();
+import './impl/xishuai';
+import './impl/test';
